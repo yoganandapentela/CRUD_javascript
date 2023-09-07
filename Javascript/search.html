@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center">
+    <div>
+Name::<input type="text" id="name" name="name"><br><br>
+Age::<input type="number" id="age" name="age"><br><br>
+Male::<input type="radio" name="gender" value="male">
+Female::<input type="radio" name="gender" value="female"><br><br>
+<button id="save" onclick="rrr()">Save</button>
+    </div>
+    
+    <div id="sample-table">
+        <h3>...Search Functionality...</h3>
+        <input type="text" class="btn btn-outline-primary" id="searchbar" onkeyup="search()">
+
+        <table class="container text-center">
+            <thead>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </thead>
+            <tbody id="tablebody"></tbody>
+        </table>
+    </div>
+
+</div>
+
+    <script>
+       
+       tabledata=[];
+
+        
+
+
+
+
+        function updatetable(tabledata)
+        {    
+            var table=document.getElementById("tablebody");
+            table.innerHTML="";
+            console.log(tabledata)
+            for( var i=0;i<tabledata.length;i++){
+            var newrow=table.insertRow(table.rows.length);
+            const cellname=newrow.insertCell(0);
+            const cellage=newrow.insertCell(1);
+            const cellgender=newrow.insertCell(2);
+      
+            cellname.innerHTML=tabledata[i].name;
+            cellage.innerHTML=tabledata[i].age;
+            cellgender.innerHTML=tabledata[i].gender;
+            }
+    
+        
+         }
+        
+
+        function rrr(){ 
+            
+            var name=document.getElementById("name").value;
+            var age=document.getElementById("age").value;
+            var gender=document.querySelector('input[name="gender"]:checked').value;
+            var tab=document.getElementById("tablebody");
+            tabledata.push({name,age,gender});
+            
+            updatetable(tabledata);
+     }
+
+     function search(){
+            var results=[]
+            console.log(":::"+tabledata);
+            var searchinput=document.getElementById("searchbar").value;
+            for(var i=0;i<tabledata.length;i++)
+            {
+                var si=searchinput.toLowerCase();
+                if((tabledata[i].name.toLowerCase()).includes(si))
+                {
+                   results.push(tabledata[i]);
+                }
+
+            }
+            updatetable(results);
+
+        }
+        
+        
+    </script>
+
+</body>
+</html>

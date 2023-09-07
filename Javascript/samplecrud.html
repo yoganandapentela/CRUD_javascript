@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="form">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for ="age">Age</label>
+    <input type="number" id="age" name="age" required><br>
+
+    <label for="gender" required>Gender</label>
+    Male::<input type="radio" id="gender" name="gender" value="Male">
+    Female::<input type="radio" id="female" name="gender" value="Female"><br><br>
+
+    <label>Date of Birth</label>
+    <input type="date" id="date" name="date" required><br><br>
+    
+    <label for="country">Country</label>
+    <select id="country" onchange="coun()" required>
+        <option id="" name="">Select Country</option>
+        <option id="usa" name="usa">usa</option>
+        <option id="india" name="india">india</option>
+     </select>
+     <br><br>
+     
+     <label for="state" >States</label>
+     <select id="state" onchange="stat()" required></select><br><br>
+
+     <label for="district">Districts</label>
+     <select id="district" required></select><br><br>
+
+     <label>::Hobbies::</label><br>
+     
+     Cricket::<input type="checkbox" id="crikcet" value="crikcet" name="check"><br>
+     Chess::<input type="checkbox" id="chess" value="chess" name="check"><br>
+     Hockey::<input type="checkbox" id="hockey" value="hockey" name="check"><br>
+     Kabaddi::<input type="checkbox" id="kabaddi" value="kabaddi" name="check"><br><bR>
+    <label for="myFile">Upload ur identity</label>
+    <input type="file" id="myFile" name="filename" required><br><br>
+
+
+
+
+    <button id="but1" onclick="fun1()">Save</button>
+    <button id="but2">Cancel</button>
+    </div>
+    <script src="samplecrud.js"></script>
+    
+</body>
+</html>

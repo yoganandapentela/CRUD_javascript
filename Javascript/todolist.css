@@ -1,0 +1,6 @@
+#box{
+    width: 70%;
+    min-width: 100px;
+    max-width: 450px;
+    border: 30px 20px 30px 20px;
+}
