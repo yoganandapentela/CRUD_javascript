@@ -1,11 +1,11 @@
-var selectedrow=null;
+var selectedRow=null;
 
 //Main function...
 function formsubmit(){
      if(validate())
      {
         var formdata=fun1();
-        if(selectedrow==null)
+        if(selectedRow==null)
         {
             insertnewrecord(formdata);
         }
@@ -109,25 +109,25 @@ function onEdit(td) {
     document.getElementById("surname").value = selectedRow.cells[1].innerHTML;
     document.getElementById("email").value = selectedRow.cells[2].innerHTML;
     document.getElementById("mobile").value = selectedRow.cells[3].innerHTML;
-    document.getElementById("country").value = selectedRow.cells[0].innerHTML;
-    document.getElementById("state").value = selectedRow.cells[1].innerHTML;
-    document.getElementById("district").value = selectedRow.cells[2].innerHTML;
-    document.getElementById("yourself").value = selectedRow.cells[3].innerHTML;
+    document.getElementById("country").value = selectedRow.cells[4].innerHTML;
+    document.getElementById("state").value = selectedRow.cells[5].innerHTML;
+    document.getElementById("district").value = selectedRow.cells[6].innerHTML;
+    document.getElementById("yourself").value = selectedRow.cells[9].innerHTML;
 }
 
 //function to update
-function updateRecord(formdata) {
-    selectedRow.cells[0].innerHTML = formData.name;
-    selectedRow.cells[1].innerHTML = formData.surname;
-    selectedRow.cells[2].innerHTML = formData.email;
-    selectedRow.cells[3].innerHTML = formData.mobile;
-    selectedRow.cells[4].innerHTML = formData.country;
-    selectedRow.cells[5].innerHTML = formData.state;
-    selectedRow.cells[6].innerHTML = formData.district;
-    selectedRow.cells[7].innerHTML = formData.gender;
-    selectedRow.cells[8].innerHTML = formData.checkedvalues;
-    selectedRow.cells[9].innerHTML = formData.yourself;
-    selectedRow.cells[10].innerHTML = formData.date;
+function updatenewrecord(formdata) {
+    selectedRow.cells[0].innerHTML = formdata.name;
+    selectedRow.cells[1].innerHTML = formdata.surname;
+    selectedRow.cells[2].innerHTML = formdata.email;
+    selectedRow.cells[3].innerHTML = formdata.mobile;
+    selectedRow.cells[4].innerHTML = formdata.country;
+    selectedRow.cells[5].innerHTML = formdata.state;
+    selectedRow.cells[6].innerHTML = formdata.district;
+    selectedRow.cells[7].innerHTML = formdata.gender;
+    selectedRow.cells[8].innerHTML = formdata.checkedvalues;
+    selectedRow.cells[9].innerHTML = formdata.yourself;
+    selectedRow.cells[10].innerHTML = formdata.date;
 }
 
 //function to delete operation
@@ -236,11 +236,7 @@ function stat(){
 function validate() {
     isValid = true;
      errname=document.getElementById("errname");
-     errsurname=document.getElementById("errsurname");
-     erremail=document.getElementById("erremail");
-     errmobile=document.getElementById("errmobile");
-     errcountry=document.getElementById("errcountry");
-     errstate=document.getElementById("errstate");
+     
     
     if (document.getElementById("name").value =="") {
        
@@ -248,48 +244,6 @@ function validate() {
 
         isValid = false;
 
-    }
-    if (document.getElementById("surname").value =="") {
-        
-        errsurname.innerText="the field is required";
-
-        isValid = false;
-
-    }
-
-    if (document.getElementById("email").value =="") {
-        
-        erremail.innerText="the field is required";
-
-        isValid = false;
-
-    }
-    if (document.getElementById("mobile").value == "") {
-        
-        errmobile.innerText="the field is required";
-
-        isValid = false;
-
-    }
-
-    if (document.getElementById("country").value == "Select Country") {
-        
-        errcountry.innerText="the field is required";
-
-        isValid = false;
-
-    }
-    if (document.getElementById("state").value == "select state") {
-        
-        errstate.innerText="the field is required";
-
-        isValid = false;
-
-    }
-    else{
-    errname.innerText="";
-    errsurname.innerText="";
-    erremail.innerHTML="";
     }
     return isValid;
 }
