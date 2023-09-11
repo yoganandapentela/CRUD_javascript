@@ -64,19 +64,19 @@ function insertnewrecord(data){
    cell1 = newRow.insertCell(3);
    cell1.innerHTML=data.mobile;
    cell1 = newRow.insertCell(4);
-   cell1.innerHTML=data.country;
-   cell1 = newRow.insertCell(5);
-   cell1.innerHTML=data.state;
-   cell1 = newRow.insertCell(6);
-   cell1.innerHTML=data.district;
-   cell1 = newRow.insertCell(7);
    cell1.innerHTML=data.gender;
+   cell1 = newRow.insertCell(5);
+   cell1.innerHTML=data.country;
+   cell1 = newRow.insertCell(6);
+   cell1.innerHTML=data.state;
+   cell1 = newRow.insertCell(7);
+   cell1.innerHTML=data.district;
    cell1 = newRow.insertCell(8);
-   cell1.innerHTML=data.checkedvalues;
-   cell1 = newRow.insertCell(9);
-   cell1.innerHTML=data.yourself;
-   cell1 = newRow.insertCell(10);
    cell1.innerHTML=data.date;
+   cell1 = newRow.insertCell(9);
+   cell1.innerHTML=data.checkedvalues;
+   cell1 = newRow.insertCell(10);
+   cell1.innerHTML=data.yourself;
    cell1 = newRow.insertCell(11);
    cell1.innerHTML=`<button onClick="onEdit(this)">Edit</button>
                     <button onClick="onDelete(this)">Delete</button>`;
@@ -94,9 +94,16 @@ function resetform() {
     document.getElementById("country").value = "";
     document.getElementById("state").value = "";
     document.getElementById("district").value = "";
-    document.getElementById("gender").value = "";
-//document.getElementById("chekedvalues").value = "";
-    document.getElementById("youself").value = "";
+    const genderRadios = document.querySelectorAll('input[name="gender"]');
+        genderRadios.forEach(function (radio) {
+            radio.checked = false;
+        });
+   
+   const hobbies = document.querySelectorAll('input[name="check"]');
+           hobbies.forEach(function (radio) {
+            radio.checked = false;
+        });
+    document.getElementById("yourself").value = "";
     document.getElementById("date").value = "";
 
     selectedRow = null;
@@ -109,10 +116,29 @@ function onEdit(td) {
     document.getElementById("surname").value = selectedRow.cells[1].innerHTML;
     document.getElementById("email").value = selectedRow.cells[2].innerHTML;
     document.getElementById("mobile").value = selectedRow.cells[3].innerHTML;
-    document.getElementById("country").value = selectedRow.cells[4].innerHTML;
-    document.getElementById("state").value = selectedRow.cells[5].innerHTML;
-    document.getElementById("district").value = selectedRow.cells[6].innerHTML;
-    document.getElementById("yourself").value = selectedRow.cells[9].innerHTML;
+    document.getElementById("gender").value = selectedRow.cells[4].innerHTML;
+
+    var genderRadioButtons = document.querySelectorAll('input[name="gender"]');
+            for (var j = 0; j < genderRadioButtons.length; j++) {
+                if (genderRadioButtons[j].value === selectedRow.cells[4].innerHTML) {
+                    genderRadioButtons[j].checked = true;
+                    break;
+                }
+            }
+    document.getElementById("country").value = selectedRow.cells[5].innerHTML;
+    document.getElementById("state").value = selectedRow.cells[6].innerHTML;
+    document.getElementById("district").value = selectedRow.cells[7].innerHTML;
+    document.getElementById("date").value = selectedRow.cells[8].innerHTML;
+
+
+    const checkboxes = document.querySelectorAll('input[name="check"]');
+    const checkedValues = selectedRow.cells[9].innerHTML.split(", "); // Convert the string to an array
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = checkedValues.includes(checkbox.value); // Check the checkbox if its value is in the array
+    });
+    
+    document.getElementById("yourself").value = selectedRow.cells[10].innerHTML;
+
 }
 
 //function to update
@@ -121,13 +147,14 @@ function updatenewrecord(formdata) {
     selectedRow.cells[1].innerHTML = formdata.surname;
     selectedRow.cells[2].innerHTML = formdata.email;
     selectedRow.cells[3].innerHTML = formdata.mobile;
-    selectedRow.cells[4].innerHTML = formdata.country;
-    selectedRow.cells[5].innerHTML = formdata.state;
-    selectedRow.cells[6].innerHTML = formdata.district;
-    selectedRow.cells[7].innerHTML = formdata.gender;
-    selectedRow.cells[8].innerHTML = formdata.checkedvalues;
-    selectedRow.cells[9].innerHTML = formdata.yourself;
-    selectedRow.cells[10].innerHTML = formdata.date;
+    selectedRow.cells[4].innerHTML = formdata.gender;
+    selectedRow.cells[5].innerHTML = formdata.country;
+    selectedRow.cells[6].innerHTML = formdata.state;
+    selectedRow.cells[7].innerHTML = formdata.district;
+    selectedRow.cells[8].innerHTML = formdata.date;
+    selectedRow.cells[9].innerHTML = formdata.checkedvalues;
+    selectedRow.cells[10].innerHTML = formdata.yourself;
+    
 }
 
 //function to delete operation
@@ -141,17 +168,7 @@ function onDelete(td)
     }
 }
 
-/* 
 
-//function for getting file upload
- selectedFile="";
-var fileInput=document.getElementById("myFile");
-fileInput.addEventListener("change",function(){
-     selectedFile=fileInput.files[0];
-   // console.log("f"+selectedFile.name);
-})  
-
-*/
 
     
 //logic for getting states dropdown
