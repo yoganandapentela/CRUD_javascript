@@ -6,48 +6,104 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="form">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required><br>
-    <label for ="age">Age</label>
-    <input type="number" id="age" name="age" required><br>
 
-    <label for="gender" required>Gender</label>
-    Male::<input type="radio" id="gender" name="gender" value="Male">
-    Female::<input type="radio" id="female" name="gender" value="Female"><br><br>
+    <form onsubmit="event.preventDefault();formsubmit();" autocomplete="off">
+    <div id="form">
+    <label for="name">Name*</label>
+    <input type="text" id="name" name="name"minlength="8" maxlength="50" >
+    <span id="errname"></span><br><br>
+    
+
+    <label for="surname">Surname*</label>
+    <input type="text" id="surname" name="surname"minlength="8" maxlength="50">
+    <span id="errsurname"></span><br><br>
+
+    <label for="email">Email*</label>
+    <input type="email" id="email" name="email" >
+    <span id="erremail"></span><br><br>
+
+    <label for="mobile">Mobile*</label>
+    <input type="number" id="mobile" name="mobile" >
+    <span id="errmobile"></span><br><br>
+
+    <label for="gender" >Gender*</label>
+    Male::<input type="radio" id="male" name="gender" value="male" >
+    Female::<input type="radio" id="female" name="gender" value="female"><br><br>
+    <span id="errmobile"></span><br><br>
+
 
     <label>Date of Birth</label>
-    <input type="date" id="date" name="date" required><br><br>
+    <input type="date" id="date" name="date" ><br><br>
+    <span id="errmobile"></span><br><br>
+
     
     <label for="country">Country</label>
-    <select id="country" onchange="coun()" required>
-        <option id="" name="">Select Country</option>
-        <option id="usa" name="usa">usa</option>
-        <option id="india" name="india">india</option>
+    <select id="country" onchange="coun()" >
+        <option id="" name="" value="">Select Country</option>
+        <option id="usa" name="usa" value="usa">usa</option>
+        <option id="india" name="india" value="india">india</option>
+        <option id="srilanka" name="srilanka" value="srilanka">srilanka</option>
+        <option id="nepal" name="nepal" value="nepal">nepal</option>
+        <option id="australia" name="australia" value="australia">australia</option>
      </select>
+     <span id="errcountry"></span>
      <br><br>
      
      <label for="state" >States</label>
-     <select id="state" onchange="stat()" required></select><br><br>
+     <select id="state" onchange="stat()" ></select>
+     <span id="errstate"></span><br><br>
+     <br><br>
 
      <label for="district">Districts</label>
-     <select id="district" required></select><br><br>
+     <select id="district" ></select>
+     <span id="errmobile"></span><br><br>
+     <br><br>
 
      <label>::Hobbies::</label><br>
      
      Cricket::<input type="checkbox" id="crikcet" value="crikcet" name="check"><br>
      Chess::<input type="checkbox" id="chess" value="chess" name="check"><br>
      Hockey::<input type="checkbox" id="hockey" value="hockey" name="check"><br>
-     Kabaddi::<input type="checkbox" id="kabaddi" value="kabaddi" name="check"><br><bR>
-    <label for="myFile">Upload ur identity</label>
-    <input type="file" id="myFile" name="filename" required><br><br>
+     Kabaddi::<input type="checkbox" id="kabaddi" value="kabaddi" name="check"><br><br>
+
+   <!-- <label for="myFile">Upload ur identity</label>
+    <input type="file" id="myFile" name="filename" ><br><br>-->
+
+
+    <label for="yourself">Tell me about yourself</label></p>
+    <textarea id="yourself" name="yourself" rows="4" cols="50"></textarea><br><br>
 
 
 
 
-    <button id="but1" onclick="fun1()">Save</button>
+    <input type="submit" id="submit">
     <button id="but2">Cancel</button>
-    </div>
+    </div><br><br>
+    </form>
+    <h2>..........DETAILS..........</h2>
+    <table  id="employeeList">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Mobile no</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>States</th>
+                <th>Districts</th>
+                <th>Hobbies</th>
+                <th>Yourself</th>
+                <th>DOB</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
     <script src="samplecrud.js"></script>
     
 </body>
