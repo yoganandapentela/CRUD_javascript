@@ -25,7 +25,8 @@ function fun1(){
     formdata["surname"]=document.getElementById("surname").value;
     formdata["email"]=document.getElementById("email").value;
     formdata["mobile"]=document.getElementById("mobile").value;
-    formdata["gender"]=document.getElementById("gender").value;
+    formdata["gender"]=document.querySelector('input[name="gender"]:checked').value;
+
     formdata["country"]=document.getElementById("country").value;
     formdata["state"]=document.getElementById("state").value;
     formdata["district"]=document.getElementById("district").value;
@@ -116,7 +117,6 @@ function onEdit(td) {
     document.getElementById("surname").value = selectedRow.cells[1].innerHTML;
     document.getElementById("email").value = selectedRow.cells[2].innerHTML;
     document.getElementById("mobile").value = selectedRow.cells[3].innerHTML;
-    document.getElementById("gender").value = selectedRow.cells[4].innerHTML;
 
     var genderRadioButtons = document.querySelectorAll('input[name="gender"]');
             for (var j = 0; j < genderRadioButtons.length; j++) {
@@ -135,6 +135,7 @@ function onEdit(td) {
     const checkedValues = selectedRow.cells[9].innerHTML.split(", "); // Convert the string to an array
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = checkedValues.includes(checkbox.value); // Check the checkbox if its value is in the array
+        console.log("checkbox::"+checkbox.value+" checked: "+checkbox.checked);
     });
     
     document.getElementById("yourself").value = selectedRow.cells[10].innerHTML;
@@ -246,6 +247,88 @@ function stat(){
 
 
 }
+
+//logic for form validations
+/*document.getElementById("name").addEventListener("input",validateInput);
+
+function validateInput(event){
+    const fieldId=event.target.id;
+    const errorMessageId="err"+fieldId.id;
+    if(event.target.value==="")
+    {
+        document.getElementById(errorMessageId).textContent="The field is Required";
+    }
+    else{
+        document.getElementById(errorMessageId).textContent="";
+    }
+}*/
+var nameinp=document.getElementById("name");
+var surnameinp=document.getElementById("surname");
+    var emailinp=document.getElementById("email");
+//var gender=document.querySelector('input[name="gender"]:checked').value;
+    var mobileinp=document.getElementById("mobile");
+    var countryinp=document.getElementById("country");
+     var stateinp=document.getElementById("state");
+     var districtinp=document.getElementById("district");
+     var dateinp=document.getElementById("date");
+     var checkedValues = []; 
+     var inputElements = document.querySelectorAll('input[type="checkbox"][name="check"]');
+     for(var i=0; i< inputElements.length; i++){
+       if(inputElements[i].checked){
+            checkedValues.push(inputElements[i].value);
+            //break;
+       }
+     }
+    var yourselfinp=document.getElementById("yourself");
+    
+    nameinp.addEventListener("input",function(){
+    if (nameinp.value.trim()==="") {
+   
+        document.getElementById("errname").innerText="the field is required";
+
+        isValid = false;
+     }
+     else{
+        document.getElementById("errname").innerText="";
+     }
+});
+
+surnameinp.addEventListener("input",function(){
+    if (surnameinp.value.trim()==="") {
+   
+        document.getElementById("errsurname").innerText="the field is required";
+
+        isValid = false;
+     }
+     else{
+        document.getElementById("errsurname").innerText="";
+     }
+});
+
+countryinp.addEventListener("change",function(){
+    if (countryinp.value==="") {
+   
+        document.getElementById("errcountry").innerText="the field is required";
+
+        isValid = false;
+     }
+     else{
+        document.getElementById("errcountry").innerText="";
+     }
+});
+
+stateinp.addEventListener("change",function(){
+    if (state.value==="select state") {
+   
+        document.getElementById("errstate").innerText="the field is required";
+
+        isValid = false;
+     }
+     else{
+        document.getElementById("errstate").innerText="";
+     }
+});
+
 
 
 
