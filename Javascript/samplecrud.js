@@ -1,19 +1,20 @@
-var selectedRow=null;
-
+var selectedRow = null;
+var count = 0;
 //Main function...
-function formsubmit(){
-     if(validate())
-     {
-        var formdata=fun1();
-        if(selectedRow==null)
-        {
+function formsubmit() {
+    if (validate()) {
+        var formdata = fun1();
+        if (selectedRow == null) {
+            document.getElementById("norecords").innerText = "";
+            count++;
             insertnewrecord(formdata);
+
         }
-        else{
+        else {
             updatenewrecord(formdata);
         }
         resetform();
-     }
+    }
 
 }
 
@@ -33,74 +34,74 @@ function calculateAge(dob) {
 
 
 // used for retrieving form data
-function fun1(){
-    formdata={};
-    formdata["name"]=document.getElementById("name").value;
-    formdata["surname"]=document.getElementById("surname").value;
-    formdata["email"]=document.getElementById("email").value;
-    formdata["mobile"]=document.getElementById("mobile").value;
-    formdata["gender"]=document.querySelector('input[name="gender"]:checked').value;
+function fun1() {
+    formdata = {};
+    formdata["name"] = document.getElementById("name").value;
+    formdata["surname"] = document.getElementById("surname").value;
+    formdata["email"] = document.getElementById("email").value;
+    formdata["mobile"] = document.getElementById("mobile").value;
+    formdata["gender"] = document.querySelector('input[name="gender"]:checked').value;
 
-    formdata["country"]=document.getElementById("country").value;
-    formdata["state"]=document.getElementById("state").value;
-    formdata["district"]=document.getElementById("district").value;
-    formdata["date"]=document.getElementById("date").value;
+    formdata["country"] = document.getElementById("country").value;
+    formdata["state"] = document.getElementById("state").value;
+    formdata["district"] = document.getElementById("district").value;
+    formdata["date"] = document.getElementById("date").value;
 
-    
-    var checkedValues = []; 
+
+    var checkedValues = [];
     var inputElements = document.querySelectorAll('input[type="checkbox"][name="check"]');
-    for(var i=0; i< inputElements.length; i++){
-      if(inputElements[i].checked){
-           checkedValues.push(inputElements[i].value);
-           //break;
-      }
+    for (var i = 0; i < inputElements.length; i++) {
+        if (inputElements[i].checked) {
+            checkedValues.push(inputElements[i].value);
+            //break;
+        }
     }
-    formdata["checkedvalues"]=checkedValues;
-    formdata["yourself"]=document.getElementById("yourself").value;
-    
+    formdata["checkedvalues"] = checkedValues;
+    formdata["yourself"] = document.getElementById("yourself").value;
 
-   // console.log("checkboxes::::"+checkedValues);
-   console.log(formdata);
-   console.log("**********Just The Beginning******")
-return formdata;
-    
+
+    // console.log("checkboxes::::"+checkedValues);
+    console.log(formdata);
+    console.log("**********Just The Beginning******")
+    return formdata;
+
 
 }
 
 //inserting a row
-function insertnewrecord(data){
-   var table=document.getElementById("employeeList").getElementsByTagName("tbody")[0];
-   var newRow = table.insertRow(table.length);
-   cell1 = newRow.insertCell(0);
-   cell1.innerHTML=data.name;
-   cell1 = newRow.insertCell(1);
-   cell1.innerHTML=data.surname;
-   cell1 = newRow.insertCell(2);
-   cell1.innerHTML=data.email;
-   cell1 = newRow.insertCell(3);
-   cell1.innerHTML=data.mobile;
-   cell1 = newRow.insertCell(4);
-   cell1.innerHTML=data.gender;
-   cell1 = newRow.insertCell(5);
-   cell1.innerHTML=data.country;
-   cell1 = newRow.insertCell(6);
-   cell1.innerHTML=data.state;
-   cell1 = newRow.insertCell(7);
-   cell1.innerHTML=data.district;
-   cell1 = newRow.insertCell(8);
-   cell1.innerHTML=data.date;
-   cell1 = newRow.insertCell(9);
-   cell1.innerHTML=data.checkedvalues;
-   cell1 = newRow.insertCell(10);
-   cell1.innerHTML=data.yourself;
+function insertnewrecord(data) {
+    var table = document.getElementById("employeeList").getElementsByTagName("tbody")[0];
+    var newRow = table.insertRow(table.length);
+    cell1 = newRow.insertCell(0);
+    cell1.innerHTML = data.name;
+    cell1 = newRow.insertCell(1);
+    cell1.innerHTML = data.surname;
+    cell1 = newRow.insertCell(2);
+    cell1.innerHTML = data.email;
+    cell1 = newRow.insertCell(3);
+    cell1.innerHTML = data.mobile;
+    cell1 = newRow.insertCell(4);
+    cell1.innerHTML = data.gender;
+    cell1 = newRow.insertCell(5);
+    cell1.innerHTML = data.country;
+    cell1 = newRow.insertCell(6);
+    cell1.innerHTML = data.state;
+    cell1 = newRow.insertCell(7);
+    cell1.innerHTML = data.district;
+    cell1 = newRow.insertCell(8);
+    cell1.innerHTML = data.date;
+    cell1 = newRow.insertCell(9);
+    cell1.innerHTML = data.checkedvalues;
+    cell1 = newRow.insertCell(10);
+    cell1.innerHTML = data.yourself;
 
-   const age = calculateAge(data.date);
+    const age = calculateAge(data.date);
     cell1 = newRow.insertCell(11);
     cell1.innerHTML = age;
-   cell1 = newRow.insertCell(12);
-   cell1.innerHTML=`<button onClick="onEdit(this)">Edit</button>
+    cell1 = newRow.insertCell(12);
+    cell1.innerHTML = `<button onClick="onEdit(this)">Edit</button>
                     <button onClick="onDelete(this)">Delete</button>`;
-   
+
 
 }
 
@@ -115,14 +116,14 @@ function resetform() {
     document.getElementById("state").value = "";
     document.getElementById("district").value = "";
     const genderRadios = document.querySelectorAll('input[name="gender"]');
-        genderRadios.forEach(function (radio) {
-            radio.checked = false;
-        });
-   
-   const hobbies = document.querySelectorAll('input[name="check"]');
-           hobbies.forEach(function (radio) {
-            radio.checked = false;
-        });
+    genderRadios.forEach(function (radio) {
+        radio.checked = false;
+    });
+
+    const hobbies = document.querySelectorAll('input[name="check"]');
+    hobbies.forEach(function (radio) {
+        radio.checked = false;
+    });
     document.getElementById("yourself").value = "";
     document.getElementById("date").value = "";
 
@@ -132,6 +133,7 @@ function resetform() {
 
 // Function to edit
 function onEdit(td) {
+    resetform();
     selectedRow = td.parentElement.parentElement;
     document.getElementById("name").value = selectedRow.cells[0].innerHTML;
     document.getElementById("surname").value = selectedRow.cells[1].innerHTML;
@@ -146,7 +148,9 @@ function onEdit(td) {
         }
     }
     document.getElementById("country").value = selectedRow.cells[5].innerHTML;
+    coun();
     document.getElementById("state").value = selectedRow.cells[6].innerHTML;
+    stat();
     document.getElementById("district").value = selectedRow.cells[7].innerHTML;
     document.getElementById("date").value = selectedRow.cells[8].innerHTML;
 
@@ -177,96 +181,102 @@ function updatenewrecord(formdata) {
 
     const age = calculateAge(formdata.date);
     selectedRow.cells[11].innerHTML = age;
-    
+
 }
 
 //function to delete operation
-function onDelete(td)
-{
-    var row=td.parentElement.parentElement;
-    if(confirm("Are you sure to delete recoed??"))
-    {
+function onDelete(td) {
+    var row = td.parentElement.parentElement;
+    if (confirm("Are you sure to delete record??")) {
         document.getElementById("employeeList").deleteRow(row.rowIndex);
+        count--;
+        if (count == 0) {
+            document.getElementById("norecords").innerText = "NO RECORDS FOUND";
+        }
         resetform();
     }
+
 }
 
 
 
-    
+
 //logic for getting states dropdown
-function coun(){
-    var stateselect=document.getElementById("state");
-    var c1=document.getElementById("country");
-    var c2=c1.value;
-   // debugger;
-   stateselect.innerHTML="";
-    var states={
-        usa:["select state","newyork","california","texas"],
-        india:["select state","ap","ts","mh"],
-        srilanka:["select state","central","eastern","western"],
-        nepal:["select state","madhesh","gandhaki","lumbini"],
-        australia:["select state","victoria","queensland","tasmania"]
+function coun() {
+    var stateselect = document.getElementById("state");
+    var c1 = document.getElementById("country");
+    var c2 = c1.value;
+    // debugger;
+    stateselect.innerHTML = "<option value=''>select state</option>";
+    var states = {
+        usa: ["newyork", "california", "texas"],
+        india: ["ap", "ts", "mh"],
+        srilanka: ["central", "eastern", "western"],
+        nepal: ["madhesh", "gandhaki", "lumbini"],
+        australia: ["victoria", "queensland", "tasmania"]
     };
 
-     var selectedstate=states[c2];
-   // console.log(selectedstate);
+    var selectedstate = states[c2];
+    // console.log(selectedstate);
 
-    selectedstate.forEach((s)=>{
-     var option=document.createElement("option");
-     option.value=s;
-     option.id=s;
-     option.text=s;
-     option.name=s;
-    stateselect.appendChild(option);
-    
-    
-    })
+    selectedstate.forEach((s) => {
+        var option = document.createElement("option");
+        option.value = s;
+        option.id = s;
+        option.text = s;
+        option.name = s;
+        stateselect.appendChild(option);
+
+
+    });
+    stat();
+
 }
 
 //logic for getting districts dropdown
-function stat(){
-   var selectedone=document.getElementById("state").value;
-   var selecteddistrict=document.getElementById("district");
-   selecteddistrict.innerHTML="";
-   //console.log(selectedone);
+function stat() {
+    var selectedone = document.getElementById("state").value;
+    var selecteddistrict = document.getElementById("district");
+    selecteddistrict.innerHTML = "<option value=''>select district</option>";
+    //console.log(selectedone);
 
-    var districts={
+    var districts = {
         //us
-        newyork:["select district","manhattan","brooklyn","queens"],
-        california:["select district","cerritos","los-angels","Oakland"],
-        texas:["select district","houston","dallas","Albany"],
+        newyork: ["manhattan", "brooklyn", "queens"],
+        california: ["cerritos", "los-angels", "Oakland"],
+        texas: ["houston", "dallas", "Albany"],
         //bharat
-        ap:["select district","krishna","ntr","guntur"],
-        ts:["select district","khammam","nalgonda","suryapeta"],
-        mh:["select district","pune","nanded","nashik"],
+        ap: ["krishna", "ntr", "guntur"],
+        ts: ["khammam", "nalgonda", "suryapeta"],
+        mh: ["pune", "nanded", "nashik"],
         //srilanka
-        central:["select district","hatton","campola","matale"],
-        eastern:["select distrcict","ampara","batticoala","ampara"],
-        western:["select district","colombo","negambo","gampaha"],
+        central: ["hatton", "campola", "matale"],
+        eastern: ["ampara", "batticoala", "ampara"],
+        western: ["colombo", "negambo", "gampaha"],
         //nepal
-        madhesh:["select state","janakpur","birgunj","kalaiya"],
-        gandhaki:["select user","pokhara","waling","gorkha"],
-        lumbini:["select user","bhutwal","ghorahi","tulsipur"],
+        madhesh: ["janakpur", "birgunj", "kalaiya"],
+        gandhaki: ["pokhara", "waling", "gorkha"],
+        lumbini: ["bhutwal", "ghorahi", "tulsipur"],
         //australia
-        victoria:["select user","melboune","ballarat","bendigo"],
-        queensland:["select user","brisbane","mackey","cairns"],
-        tasmania:["select user","hobort","devonport","launceston"]
+        victoria: ["melboune", "ballarat", "bendigo"],
+        queensland: ["brisbane", "mackey", "cairns"],
+        tasmania: ["hobort", "devonport", "launceston"]
 
 
 
     }
-    var dis=districts[selectedone];
-    dis.forEach((d)=>{
-        var option=document.createElement("option");
-        option.value=d;
-        option.id=d;
-        option.name-d;
-        option.text=d;
-       selecteddistrict.appendChild(option);
-       districts=undefined;
-    })
-
+    var dis = districts[selectedone];
+    if (dis != undefined) {
+        dis.forEach((d) => {
+            var option = document.createElement("option");
+            option.value = d;
+            option.id = d;
+            option.name - d;
+            option.text = d;
+            selecteddistrict.appendChild(option);
+            districts = undefined;
+        })
+    }
 
 }
 
@@ -286,7 +296,6 @@ function validateInput(event){
 }*/
 
 
-// ... Your existing code ...
 
 var nameinp = document.getElementById("name");
 var surnameinp = document.getElementById("surname");
@@ -347,7 +356,7 @@ countryinp.addEventListener("change", function () {
 });
 
 stateinp.addEventListener("change", function () {
-    if (stateinp.value === "select state") {
+    if (stateinp.value === "") {
         document.getElementById("errstate").innerText = "The field is required";
     } else {
         document.getElementById("errstate").innerText = "";
@@ -355,7 +364,7 @@ stateinp.addEventListener("change", function () {
 });
 
 districtinp.addEventListener("change", function () {
-    if (districtinp.value === "select district") {
+    if (districtinp.value === "") {
         document.getElementById("errdistrict").innerText = "The field is required";
     } else {
         document.getElementById("errdistrict").innerText = "";
@@ -385,7 +394,7 @@ inputElements.forEach(function (checkbox) {
         if (checkedCheckboxes.length === 0) {
             document.getElementById("errcheck").innerText = "At least one checkbox is required";
         } else {
-            document.getElementById("errcheck").innerText = "";
+            //document.getElementById("errcheck").innerText = "";
         }
     });
 });
@@ -404,7 +413,7 @@ function validate() {
     var errstate = document.getElementById("errstate");
     var errdistrict = document.getElementById("errdistrict");
     var errdate = document.getElementById("errdate");
-    var erryourself=document.getElementById("erryourself");
+    var erryourself = document.getElementById("erryourself");
 
     var nameInput = document.getElementById("name");
     var surnameInput = document.getElementById("surname");
@@ -414,26 +423,29 @@ function validate() {
     var stateInput = document.getElementById("state");
     var districtInput = document.getElementById("district");
     var dateInput = document.getElementById("date");
-    var yourselfInput=document.getElementById("yourself");
+    var yourselfInput = document.getElementById("yourself");
 
-    function validateField(input, errorElement) {
+    function validateField(input, errorElement, err) {
         if (input.value.trim() === "") {
-            errorElement.innerText = "the field is required";
+            errorElement.innerText = err;
             isValid = false;
         } else {
             errorElement.innerText = "";
         }
     }
 
-    validateField(nameInput, errname);
-    validateField(surnameInput, errsurname);
-    validateField(emailInput, erremail);
-    validateField(mobileInput, errmobile);
-    validateField(countryInput, errcountry);
-    validateField(stateInput, errstate);
-    validateField(districtInput, errdistrict);
-    validateField(dateInput, errdate);
-    validateField(yourselfInput,erryourself);
+    validateField(nameInput, errname, "The name field is Required");
+    validateField(surnameInput, errsurname, "The surname is required");
+    validateField(emailInput, erremail, "Email is required");
+    validateField(mobileInput, errmobile, "Mobile no is Required");
+    validateField(countryInput, errcountry, "Please select the Country");
+    validateField(stateInput, errstate, "please select the State");
+    validateField(districtInput, errdistrict, "Please select the District");
+    validateField(dateInput, errdate, "Please select the Date");
+    validateField(yourselfInput, erryourself, " Please Tell me about Yourself");
+
+    //
+
     //
     var genderInputs = document.querySelectorAll('input[name="gender"]');
     var errgender = document.getElementById("errgender");
