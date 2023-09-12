@@ -5,38 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<style>
+    form{
+        border-radius: 10px;
+        text-align: center;
+        background-color: bisque;
+
+    }
+#employeeList{
+    border-radius: 5px;
+    border-color: yellow;
+    background-color: lemonchiffon;
+    width: 100%;
+
+
+}
+
+thead {
+  text-align: center;
+  padding: 15px;
+  text-align: left;
+  color:firebrick
+}
+
+
+tbody {
+  text-align: center;
+  padding: 15px;
+  text-align: left;
+}
+
+.error{
+    color:red;
+}
+
+h1{
+    text-align: center;
+    color: chocolate;
+    border: 10px saddlebrown;
+}
+</style>
 </head>
 
 <body>
-
+     <h1>Registration Form</h1>
     <form onsubmit="event.preventDefault();formsubmit();" autocomplete="off">
         <div id="form">
             <label for="name">Name*</label>
-            <input type="text" id="name" name="name" minlength="8" maxlength="50">
-            <span id="errname"></span><br><br>
+            <input type="text" id="name" name="name" minlength="3" maxlength="50">
+            <span class="error" id="errname"></span><br><br>
 
 
             <label for="surname">Surname*</label>
-            <input type="text" id="surname" name="surname" minlength="8" maxlength="50">
-            <span id="errsurname"></span><br><br>
+            <input type="text" id="surname" name="surname" minlength="3" maxlength="50">
+            <span class="error" id="errsurname"></span><br><br>
 
             <label for="email">Email*</label>
             <input type="email" id="email" name="email">
-            <span id="erremail"></span><br><br>
+            <span class="error" id="erremail"></span><br><br>
 
             <label for="mobile">Mobile*</label>
-            <input type="number" id="mobile" name="mobile">
-            <span id="errmobile"></span><br><br>
+            <input type="text" id="mobile" name="mobile" pattern="[0-9]{10}">
+            <span class="error" id="errmobile"></span><br><br>
 
-            <label for="gender">Gender*</label>
-            Male::<input type="radio" id="male" name="gender" value="male">
-            Female::<input type="radio" id="female" name="gender" value="female"><br><br>
-            <span id="errgender"></span><br><br>
+            <label for="gender">Gender*</label><span class="error" id="errgender"></span><br><br>
+            <input type="radio" id="male" name="gender" value="male"><label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female"><label for="female">Female</label><br><br>
 
 
-            <label>Date of Birth</label>
-            <input type="date" id="date" name="date"><br><br>
-            <span id="errdate"></span><br><br>
+            <label for="date">Date of Birth</label>
+            <input type="date" id="date" name="date" min='1947-07-15' max='2000-12-31'>
+            <span class="error" id="errdate"></span><br><br>
 
 
             <label for="country">Country</label>
@@ -48,43 +88,47 @@
                 <option id="nepal" name="nepal" value="nepal">nepal</option>
                 <option id="australia" name="australia" value="australia">australia</option>
             </select>
-            <span id="errcountry"></span>
+            <span class="error" id="errcountry"></span>
             <br><br>
 
             <label for="state">States</label>
-            <select id="state" onchange="stat()"></select>
-            <span id="errstate"></span><br><br>
+            <select id="state" onchange="stat()">
+                <option id="" name="" value="">select state</option>
+            </select>
+            <span class="error" id="errstate"></span><br><br>
             <br><br>
 
             <label for="district">Districts</label>
-            <select id="district"></select>
-            <span id="errdistrict"></span><br><br>
+            <select id="district">
+                <option id="" name="" value="">select district</option>
+            </select>
+            <span class="error" id="errdistrict"></span><br><br>
             <br><br>
 
-            <label>::Hobbies::</label><br>
+            <label text-align:center>::Hobbies::</label><br>
 
-            Cricket::<input type="checkbox" id="crikcet" value="crikcet" name="check"><br>
-            Chess::<input type="checkbox" id="chess" value="chess" name="check"><br>
-            Hockey::<input type="checkbox" id="hockey" value="hockey" name="check"><br>
-            Kabaddi::<input type="checkbox" id="kabaddi" value="kabaddi" name="check"><br>
-            <span id="errcheckbox"></span><br><br>
+            <label for="cricket">Cricket</label><input type="checkbox" id="cricket" value="crikcet" name="check"><br>
+            <label for="chess">Chess</label><input type="checkbox" id="chess" value="chess" name="check"><br>
+            <label for="hockey">Hockey</label><input type="checkbox" id="hockey" value="hockey" name="check"><br>
+            <label for="kabaddi">Kabaddi</label><input type="checkbox" id="kabaddi" value="kabaddi" name="check"><br>
+            <span class="error" id="errcheckbox"></span><br><br>
 
             <!-- <label for="myFile">Upload ur identity</label>
     <input type="file" id="myFile" name="filename" ><br><br>-->
 
 
             <label for="yourself">Tell me about yourself</label></p>
-            <textarea id="yourself" name="yourself" rows="4" cols="50"></textarea><br><br>
-            <span id="erryourself"></span><br><br>
+            <textarea id="yourself" name="yourself" rows="4" cols="50"></textarea>
+            <span class="error" id="erryourself"></span><br><br>
 
 
 
 
             <input type="submit" id="submit">
-            <button id="but2">Cancel</button>
+            <input type="reset" value="Reset">
         </div><br><br>
     </form>
-    <h2>..........DETAILS..........</h2>
+    <h1>..........DETAILS..........</h1>
     <table id="employeeList">
         <thead>
             <tr>
@@ -96,9 +140,9 @@
                 <th>Country</th>
                 <th>States</th>
                 <th>Districts</th>
+                <th>DOB</th>
                 <th>Hobbies</th>
                 <th>Yourself</th>
-                <th>DOB</th>
                 <th>Age</th>
                 <th>Actions</th>
             </tr>
@@ -106,9 +150,10 @@
         <tbody>
 
         </tbody>
+        
     </table>
 
-
+    <h1 id="norecords">RECORDS NOT FOUND</h1>
     <script src="samplecrud.js"></script>
 
 </body>
