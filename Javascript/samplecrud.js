@@ -74,32 +74,35 @@ function insertnewrecord(data) {
     var newRow = table.insertRow(table.length);
     cell1 = newRow.insertCell(0);
     cell1.innerHTML = data.name;
-    cell1 = newRow.insertCell(1);
-    cell1.innerHTML = data.surname;
-    cell1 = newRow.insertCell(2);
-    cell1.innerHTML = data.email;
-    cell1 = newRow.insertCell(3);
-    cell1.innerHTML = data.mobile;
-    cell1 = newRow.insertCell(4);
-    cell1.innerHTML = data.gender;
-    cell1 = newRow.insertCell(5);
-    cell1.innerHTML = data.country;
-    cell1 = newRow.insertCell(6);
-    cell1.innerHTML = data.state;
-    cell1 = newRow.insertCell(7);
-    cell1.innerHTML = data.district;
-    cell1 = newRow.insertCell(8);
-    cell1.innerHTML = data.date;
-    cell1 = newRow.insertCell(9);
-    cell1.innerHTML = data.checkedvalues;
-    cell1 = newRow.insertCell(10);
-    cell1.innerHTML = data.yourself;
+    cell2 = newRow.insertCell(1);
+    cell2.innerHTML = data.surname;
+    cell3 = newRow.insertCell(2);
+    cell3.innerHTML = data.email;
+    cell4 = newRow.insertCell(3);
+    cell4.innerHTML = data.mobile;
+    cell5 = newRow.insertCell(4);
+    cell5.innerHTML = data.gender;
+    cell6 = newRow.insertCell(5);
+    cell6.innerHTML = data.country;
+    cell7 = newRow.insertCell(6);
+    cell7.innerHTML = data.state;
+    cell8 = newRow.insertCell(7);
+    cell8.innerHTML = data.district;
+    var today=new Date(data.date);
+    var month = today.toLocaleString('default', {year:'numeric', month: 'short', day:'numeric'} );
+
+    cell9 = newRow.insertCell(8);
+    cell9.innerHTML = month;
+    cell10 = newRow.insertCell(9);
+    cell10.innerHTML = data.checkedvalues;
+    cell11 = newRow.insertCell(10);
+    cell11.innerHTML = data.yourself;
 
     const age = calculateAge(data.date);
-    cell1 = newRow.insertCell(11);
-    cell1.innerHTML = age;
-    cell1 = newRow.insertCell(12);
-    cell1.innerHTML = `<button onClick="onEdit(this)">Edit</button>
+    cell12 = newRow.insertCell(11);
+    cell12.innerHTML = age;
+    cell13 = newRow.insertCell(12);
+    cell13.innerHTML = `<button onClick="onEdit(this)">Edit</button>
                     <button onClick="onDelete(this)">Delete</button>`;
 
 
@@ -115,6 +118,7 @@ function resetform() {
     document.getElementById("country").value = "";
     document.getElementById("state").value = "";
     document.getElementById("district").value = "";
+
     const genderRadios = document.querySelectorAll('input[name="gender"]');
     genderRadios.forEach(function (radio) {
         radio.checked = false;
@@ -152,7 +156,11 @@ function onEdit(td) {
     document.getElementById("state").value = selectedRow.cells[6].innerHTML;
     stat();
     document.getElementById("district").value = selectedRow.cells[7].innerHTML;
-    document.getElementById("date").value = selectedRow.cells[8].innerHTML;
+
+    var month= selectedRow.cells[8].innerHTML;
+    var d=new Date(month).toLocaleDateString('en-CA');
+    document.getElementById("date").value=d;
+
 
     // Check the checkboxes based on the values stored in selectedRow.cells[9].innerHTML
     const checkboxes = document.querySelectorAll('input[type="checkbox"][name="check"]');
@@ -175,7 +183,11 @@ function updatenewrecord(formdata) {
     selectedRow.cells[5].innerHTML = formdata.country;
     selectedRow.cells[6].innerHTML = formdata.state;
     selectedRow.cells[7].innerHTML = formdata.district;
-    selectedRow.cells[8].innerHTML = formdata.date;
+
+    var today=new Date(formdata.date);
+    var month = today.toLocaleString('default', {year:'numeric', month: 'short', day:'numeric'} );
+    selectedRow.cells[8].innerHTML = month;
+
     selectedRow.cells[9].innerHTML = formdata.checkedvalues;
     selectedRow.cells[10].innerHTML = formdata.yourself;
 
@@ -198,8 +210,25 @@ function onDelete(td) {
 
 }
 
-
-
+//function to perform search operation
+function search() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchbar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("employeeList");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
 
 //logic for getting states dropdown
 function coun() {
@@ -271,7 +300,7 @@ function stat() {
             var option = document.createElement("option");
             option.value = d;
             option.id = d;
-            option.name - d;
+            option.name = d;
             option.text = d;
             selecteddistrict.appendChild(option);
             districts = undefined;
